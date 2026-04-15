@@ -156,7 +156,7 @@ export default function AboutSection() {
                 },
                 {
                   Icon: Sparkles,
-                  text: 'Pioneering LLM orchestration and prompt-driven automation systems.',
+                  text: 'Designing and building systems that use AI to automate tasks by coordinating multiple prompts and workflows.',
                 },
               ].map(({ Icon, text }, i) => (
                 <motion.div
