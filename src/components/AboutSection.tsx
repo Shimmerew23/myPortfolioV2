@@ -78,7 +78,7 @@ export default function AboutSection() {
             variants={fadeUp}
             className="text-5xl font-headline italic mb-8 leading-tight"
           >
-            Clean code as an art form.
+            Justine Psalm Acosta
           </motion.h2>
 
           <motion.p
