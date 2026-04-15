@@ -6,16 +6,30 @@ import { EASE } from '@/lib/motion'
 const milestones = [
   {
     period: '2025 — Present',
-    title: 'Full Stack Developer',
+    title: 'Freelance Full Stack Consultant',
     description:
-      'Leading technical direction for software solutions, optimizing cloud infrastructure, and architecting secure, high-performance, and scalable enterprise-grade platforms. (Expanded into international clients across the US, Canada, and Europe)',
+      'Leading the end-to-end delivery of scalable web platforms, from system architecture to production deployment. Specializing in secure, high-performance applications and cloud infrastructure, working with international clients across the US, Canada, and Europe.',
     active: true,
   },
   {
     period: '2024',
     title: 'B.S. Computer Engineering',
     description:
-      'Graduated with a focus on hardware-software integration, laying the foundation for systemic problem-solving and algorithmic efficiency.',
+      'Graduated with a strong foundation in systems design, algorithmic thinking, and hardware-software integration—equipping me to solve complex engineering problems with efficiency and precision.',
+    active: false,
+  },
+  {
+    period: '2020 — 2023',
+    title: 'Part-time Freelance Full Stack Developer',
+    description:
+      'Delivered real-world web applications while completing my degree, gaining hands-on experience across the full stack. Built and maintained production-ready systems, strengthening both technical depth and practical problem-solving skills.',
+    active: false,
+  },
+  {
+    period: '2020',
+    title: 'Enrolled as B.S. Computer Engineering',
+    description:
+      'Began academic journey in computer engineering, developing core knowledge in computing, electronics, and software development that shaped my technical foundation.',
     active: false,
   },
 ]
@@ -24,10 +38,24 @@ export default function JourneySection() {
   return (
     <section
       id="journey"
-      className="py-32"
+      className="py-32 relative overflow-hidden"
       style={{ background: '#171212' }}
     >
-      <div className="max-w-4xl mx-auto px-8">
+      {/* Ambient glow */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background: 'radial-gradient(ellipse 50% 70% at 10% 50%, rgba(141,2,31,0.07) 0%, transparent 70%)',
+        }}
+      />
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background: 'radial-gradient(ellipse 40% 40% at 90% 20%, rgba(255,179,178,0.03) 0%, transparent 70%)',
+        }}
+      />
+
+      <div className="max-w-4xl mx-auto px-8 relative z-10">
         {/* Heading */}
         <motion.h2
           initial={{ opacity: 0, y: 30 }}
@@ -38,6 +66,17 @@ export default function JourneySection() {
         >
           The Journey
         </motion.h2>
+
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-80px' }}
+          transition={{ duration: 0.8, delay: 0.2, ease: EASE }}
+          className="text-center font-label text-[11px] uppercase tracking-[0.3em] -mt-14 mb-20"
+          style={{ color: 'rgba(236,224,223,0.4)' }}
+        >
+          Career milestones &amp; achievements
+        </motion.p>
 
         {/* Timeline */}
         <div className="relative ml-4 md:ml-0">
@@ -87,7 +126,7 @@ export default function JourneySection() {
                 {m.title}
               </motion.h3>
 
-              <p className="text-[#ece0df]/55 font-body leading-relaxed text-sm max-w-lg group-hover:text-[#ece0df]/75 transition-colors duration-500 text-justify">
+              <p className="text-[#ece0df]/55 font-body leading-relaxed text-sm group-hover:text-[#ece0df]/75 transition-colors duration-500 text-justify">
                 {m.description}
               </p>
             </motion.div>

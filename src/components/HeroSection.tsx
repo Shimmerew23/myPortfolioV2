@@ -2,7 +2,7 @@
 
 import { useRef } from 'react'
 import { motion, useScroll, useTransform, useSpring } from 'framer-motion'
-import { Code2, Brain } from 'lucide-react'
+import { Code2, Brain, Briefcase } from 'lucide-react'
 import { EASE } from '@/lib/motion'
 
 function AnimatedTitle({ text, className }: { text: string; className?: string }) {
@@ -113,6 +113,16 @@ export default function HeroSection() {
               Prompt Engineer
             </span>
           </div>
+
+          <div className="flex items-center gap-3 group cursor-default">
+            <Briefcase
+              size={18}
+              className="text-[#ffb3b2] transition-transform duration-500 group-hover:scale-110"
+            />
+            <span className="font-label text-xs uppercase tracking-[0.25em] text-[#ece0df]/50 text-center">
+              Technical Consultant
+            </span>
+          </div>
           
         </motion.div>
       </motion.div>
@@ -123,7 +133,7 @@ export default function HeroSection() {
           transition={{ delay: 2.4, duration: 1 }}
           className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
         >
-          <span className="font-label text-[10px] uppercase tracking-[0.3em] text-[#ece0df]/30">Scroll</span>
+          <span className="font-label text-[10px] uppercase tracking-[0.3em] text-[#ece0df]/30">Scroll to explore</span>
           <motion.div
             animate={{ y: [0, 8, 0] }}
             transition={{ repeat: Infinity, duration: 2, ease: 'easeInOut' }}

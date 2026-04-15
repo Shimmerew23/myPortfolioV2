@@ -60,10 +60,24 @@ export default function WorkSection() {
   return (
     <section
       id="work"
-      className="py-32"
-      style={{ background: '#171212' }}
+      className="py-32 relative overflow-hidden"
+      style={{ background: '#201a1a' }}
     >
-      <div className="max-w-7xl mx-auto px-8">
+      {/* Ambient glow */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background: 'radial-gradient(ellipse 50% 60% at 0% 50%, rgba(141,2,31,0.07) 0%, transparent 70%)',
+        }}
+      />
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background: 'radial-gradient(ellipse 40% 40% at 100% 80%, rgba(255,179,178,0.03) 0%, transparent 70%)',
+        }}
+      />
+
+      <div className="max-w-7xl mx-auto px-8 relative z-10">
         {/* Heading */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -72,7 +86,7 @@ export default function WorkSection() {
           transition={{ duration: 0.8, ease: EASE }}
           className="flex justify-between items-end mb-16"
         >
-          <h2 className="text-5xl font-headline italic">Selected Work</h2>
+          <h2 className="text-5xl font-headline italic">Portfolio</h2>
           <span className="font-label text-[11px] uppercase tracking-[0.2em] text-[#ece0df]/35 hidden md:block">
             01 / {String(projects.length).padStart(2, '0')} EXHIBITS
           </span>

@@ -1,28 +1,79 @@
 'use client'
 
+import React from 'react'
 import { motion } from 'framer-motion'
+import Image from 'next/image'
+import { Brain, Sparkles } from 'lucide-react'
 import { EASE } from '@/lib/motion'
 
-const categories = [
+const CDN = 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons'
+const SI  = 'https://cdn.simpleicons.org'
+
+type Skill = {
+  name: string
+  icon?: string
+  invert?: boolean        // invert dark SVGs so they show on dark bg
+  label?: string          // text symbol fallback
+  node?: React.ReactNode  // inline React icon
+}
+
+const categories: { label: string; accent: string; skills: Skill[] }[] = [
   {
     label: 'Frontend',
-    skills: ['React', 'Next.js', 'TypeScript', 'JavaScript', 'Tailwind CSS', 'React Native'],
+    accent: '#6366f1',
+    skills: [
+      { name: 'React',        icon: `${CDN}/react/react-original.svg` },
+      { name: 'Next.js',      icon: `${CDN}/nextjs/nextjs-original.svg`, invert: true },
+      { name: 'TypeScript',   icon: `${CDN}/typescript/typescript-original.svg` },
+      { name: 'JavaScript',   icon: `${CDN}/javascript/javascript-original.svg` },
+      { name: 'Tailwind CSS', icon: `${CDN}/tailwindcss/tailwindcss-original.svg` },
+      { name: 'React Native', icon: `${CDN}/react/react-original.svg` },
+    ],
   },
   {
     label: 'Backend',
-    skills: ['Node.js', 'Express', 'Python', 'FastAPI', 'REST APIs'],
+    accent: '#22c55e',
+    skills: [
+      { name: 'Node.js',   icon: `${CDN}/nodejs/nodejs-original.svg` },
+      { name: 'Express',   icon: `${CDN}/express/express-original.svg`, invert: true },
+      { name: 'Python',    icon: `${CDN}/python/python-original.svg` },
+      { name: 'FastAPI',   icon: `${CDN}/fastapi/fastapi-original.svg` },
+      { name: 'REST APIs', label: '</>' },
+    ],
   },
   {
     label: 'Database',
-    skills: ['PostgreSQL', 'MongoDB', 'Supabase', 'Prisma', 'MySQL', 'Firebase'],
+    accent: '#a855f7',
+    skills: [
+      { name: 'PostgreSQL', icon: `${CDN}/postgresql/postgresql-original.svg` },
+      { name: 'MongoDB',    icon: `${CDN}/mongodb/mongodb-original.svg` },
+      { name: 'Supabase',   icon: `${CDN}/supabase/supabase-original.svg` },
+      { name: 'Prisma',     icon: `${CDN}/prisma/prisma-original.svg`, invert: true },
+      { name: 'MySQL',      icon: `${CDN}/mysql/mysql-original.svg` },
+      { name: 'Firebase',   icon: `${CDN}/firebase/firebase-original.svg` },
+    ],
   },
   {
     label: 'DevOps & Tools',
-    skills: ['Docker', 'AWS', 'Vercel', 'Git', 'NGINX'],
+    accent: '#f97316',
+    skills: [
+      { name: 'Docker', icon: `${CDN}/docker/docker-original.svg` },
+      { name: 'AWS',    icon: `${CDN}/amazonwebservices/amazonwebservices-plain-wordmark.svg`, invert: true },
+      { name: 'Vercel', icon: `${CDN}/vercel/vercel-original.svg`, invert: true },
+      { name: 'Git',    icon: `${CDN}/git/git-original.svg` },
+      { name: 'NGINX',  icon: `${CDN}/nginx/nginx-original.svg` },
+    ],
   },
   {
     label: 'AI & Integrations',
-    skills: ['Claude API', 'OpenAI API', 'Stripe', 'GraphQL', 'Prompt Engineering'],
+    accent: '#ec4899',
+    skills: [
+      { name: 'Claude API',          node: <Brain size={14} className="shrink-0" style={{ color: '#D97706' }} /> },
+      { name: 'OpenAI API',          node: <Brain size={14} className="shrink-0" style={{ color: '#10A37F' }} /> },
+      { name: 'Stripe',              icon: `${SI}/stripe/635BFF` },
+      { name: 'GraphQL',             icon: `${CDN}/graphql/graphql-plain.svg` },
+      { name: 'Prompt Engineering',  node: <Sparkles size={14} className="shrink-0" /> },
+    ],
   },
 ]
 
@@ -30,10 +81,24 @@ export default function ArsenalSection() {
   return (
     <section
       id="arsenal"
-      className="py-32"
+      className="py-32 relative overflow-hidden"
       style={{ background: '#201a1a' }}
     >
-      <div className="max-w-7xl mx-auto px-8">
+      {/* Ambient glow */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background: 'radial-gradient(ellipse 55% 60% at 95% 50%, rgba(141,2,31,0.08) 0%, transparent 70%)',
+        }}
+      />
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background: 'radial-gradient(ellipse 35% 35% at 5% 80%, rgba(255,179,178,0.03) 0%, transparent 70%)',
+        }}
+      />
+
+      <div className="max-w-7xl mx-auto px-8 relative z-10">
         {/* Heading */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -42,7 +107,7 @@ export default function ArsenalSection() {
           transition={{ duration: 0.8, ease: EASE }}
           className="mb-14"
         >
-          <h2 className="text-5xl font-headline mb-3">Technical Arsenal</h2>
+          <h2 className="text-5xl font-headline mb-3">Technical Skills</h2>
           <p className="font-label text-[10px] uppercase tracking-[0.4em] text-[#ece0df]/35">
             Technologies I work with daily
           </p>
@@ -74,8 +139,11 @@ export default function ArsenalSection() {
               }}
               transition={{ duration: 0.4 }}
             >
-              {/* Burgundy top accent line */}
-              <div className="absolute top-0 left-0 w-8 h-[2px] bg-[#8d021f]" />
+              {/* Category accent line */}
+              <div
+                className="absolute top-0 left-6 w-10 h-[2px] rounded-full"
+                style={{ background: cat.accent }}
+              />
 
               {/* Hover glow */}
               <div
@@ -85,27 +153,48 @@ export default function ArsenalSection() {
                 }}
               />
 
-              <h3 className="font-label text-[10px] uppercase tracking-[0.3em] text-[#ece0df]/35 mb-8 relative z-10">
+              <h3 className="font-label text-[10px] uppercase tracking-[0.3em] text-[#ece0df]/35 mb-6 relative z-10">
                 {cat.label}
               </h3>
 
-              <div className="flex flex-wrap gap-2.5 relative z-10">
+              <div className="flex flex-wrap gap-2 relative z-10">
                 {cat.skills.map((skill, i) => (
                   <motion.span
-                    key={skill}
+                    key={skill.name}
                     initial={{ opacity: 0, scale: 0.85 }}
                     whileInView={{ opacity: 1, scale: 1 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.4, delay: i * 0.04, ease: EASE }}
-                    className="px-4 py-1.5 rounded-full text-[11px] font-label text-[#ece0df]/65 cursor-default"
-                    style={{ border: '1px solid rgba(255,255,255,0.08)' }}
+                    className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[11px] font-label text-[#ece0df]/65 cursor-default"
+                    style={{ border: '1px solid rgba(255,255,255,0.08)', background: 'rgba(255,255,255,0.03)' }}
                     whileHover={{
                       color: '#ece0df',
                       borderColor: 'rgba(255,179,178,0.3)',
                       scale: 1.04,
+                      background: 'rgba(255,255,255,0.07)',
                     }}
                   >
-                    {skill}
+                    {skill.icon ? (
+                      <Image
+                        src={skill.icon}
+                        alt={skill.name}
+                        width={14}
+                        height={14}
+                        className="shrink-0"
+                        style={skill.invert ? { filter: 'invert(1)' } : undefined}
+                        unoptimized
+                      />
+                    ) : skill.node ? (
+                      skill.node
+                    ) : skill.label ? (
+                      <span
+                        className="text-[10px] leading-none shrink-0 font-mono"
+                        style={{ color: cat.accent }}
+                      >
+                        {skill.label}
+                      </span>
+                    ) : null}
+                    {skill.name}
                   </motion.span>
                 ))}
               </div>
