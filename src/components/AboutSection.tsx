@@ -140,7 +140,7 @@ export default function AboutSection() {
               variants={fadeUp}
               className="text-[#ece0df]/70 text-lg leading-relaxed mb-10 font-body text-justify"
             >
-              I design and build secure, high-performance, and scalable 
+              I design and build secured, high-performance, and scalable 
               systems from the ground up. From architecture and infrastructure 
               to backend services and frontend experiences — I take full ownership 
               of the entire development lifecycle. I work across diverse technology 
