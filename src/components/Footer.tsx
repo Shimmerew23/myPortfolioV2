@@ -26,7 +26,7 @@ export default function Footer() {
           transition={{ duration: 0.8 }}
           className="text-[10px] font-label uppercase tracking-[0.2em] text-[#ece0df]/25 text-center md:text-left"
         >
-          © {new Date().getFullYear()} The Nocturnal Gallery. All rights reserved.
+          © {new Date().getFullYear()} Justine Acosta Portfolio. All rights reserved.
         </motion.div>
 
         {/* Nav links */}
