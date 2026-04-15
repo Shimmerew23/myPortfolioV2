@@ -19,7 +19,7 @@ const milestones = [
     active: false,
   },
   {
-    period: '2020 — 2023',
+    period: '2021 — 2023',
     title: 'Part-time Freelance Full Stack Developer',
     description:
       'Delivered real-world web applications while completing my degree, gaining hands-on experience across the full stack. Built and maintained production-ready systems, strengthening both technical depth and practical problem-solving skills.',
