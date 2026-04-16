@@ -13,6 +13,13 @@ const milestones = [
   },
   {
     period: '2024',
+    title: 'IT Support',
+    description:
+      'Early career taking up as IT Support aide, providing assistance by troubleshooting software and network issues.',
+    active: false,
+  },
+  {
+    period: '2024',
     title: 'B.S. Computer Engineering',
     description:
       'Graduated with a strong foundation in systems design, algorithmic thinking, and hardware-software integration—equipping me to solve complex engineering problems with efficiency and precision.',
