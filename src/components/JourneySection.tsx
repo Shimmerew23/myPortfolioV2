@@ -1,6 +1,7 @@
 'use client'
 
-import { motion } from 'framer-motion'
+import { useRef } from 'react'
+import { motion, useScroll, useTransform, useSpring } from 'framer-motion'
 import { EASE } from '@/lib/motion'
 
 const milestones = [
@@ -8,7 +9,7 @@ const milestones = [
     period: '2025 — Present',
     title: 'Freelance Full Stack Consultant',
     description:
-      'Leading the end-to-end delivery of scalable web platforms, from system architecture to production deployment. Specializing in secure, high-performance applications and cloud infrastructure, working with international clients across the US, Canada, and Europe.',
+      'Leading the end-to-end delivery of scalable web platforms, from system architecture to production deployment. Specializing in secure, high-performance web applications with AI integration, working with international clients across the US, Canada, and Europe.',
     active: true,
   },
   {
@@ -22,11 +23,11 @@ const milestones = [
     period: '2024',
     title: 'B.S. Computer Engineering',
     description:
-      'Graduated with a strong foundation in systems design, algorithmic thinking, and hardware-software integration—equipping me to solve complex engineering problems with efficiency and precision.',
+      'Graduated with a strong foundation in systems design, and hardware-software integration—equipping me to solve complex engineering problems with efficiency and precision.',
     active: false,
   },
   {
-    period: '2021 — 2023',
+    period: '2021',
     title: 'Part-time Freelance Full Stack Developer',
     description:
       'Delivered real-world web applications while completing my degree, gaining hands-on experience across the full stack. Built and maintained production-ready systems, strengthening both technical depth and practical problem-solving skills.',
@@ -42,8 +43,14 @@ const milestones = [
 ]
 
 export default function JourneySection() {
+  const containerRef = useRef<HTMLElement>(null)
+  const { scrollYProgress } = useScroll({ target: containerRef, offset: ['start end', 'end start'] })
+  const y       = useTransform(scrollYProgress, [0, 1], [-30, 30])
+  const springY = useSpring(y, { stiffness: 60, damping: 20 })
+
   return (
     <section
+      ref={containerRef}
       id="journey"
       className="py-32 relative overflow-hidden"
       style={{ background: '#171212' }}
@@ -62,7 +69,30 @@ export default function JourneySection() {
         }}
       />
 
-      <div className="max-w-4xl mx-auto px-8 relative z-10">
+      {/* ── Atmospheric orbs ── */}
+      <div
+        className="absolute top-1/2 left-[10%] w-[600px] h-[600px] rounded-full pointer-events-none orb-pulse"
+        style={{
+          background: 'radial-gradient(circle, rgba(141,2,31,0.1) 0%, transparent 70%)',
+          transform: 'translate(-50%, -50%)',
+        }}
+      />
+      <div
+        className="absolute top-[5%] right-[-5%] w-[420px] h-[420px] rounded-full pointer-events-none orb-drift"
+        style={{
+          background: 'radial-gradient(circle, rgba(141,2,31,0.06) 0%, transparent 70%)',
+          animationDelay: '3s',
+        }}
+      />
+      <div
+        className="absolute bottom-[5%] right-[10%] w-[300px] h-[300px] rounded-full pointer-events-none orb-drift"
+        style={{
+          background: 'radial-gradient(circle, rgba(255,179,178,0.04) 0%, transparent 70%)',
+          animationDelay: '8s',
+        }}
+      />
+
+      <motion.div style={{ y: springY }} className="max-w-4xl mx-auto px-8 relative z-10">
         {/* Heading */}
         <motion.h2
           initial={{ opacity: 0, y: 30 }}
@@ -139,7 +169,7 @@ export default function JourneySection() {
             </motion.div>
           ))}
         </div>
-      </div>
+      </motion.div>
     </section>
   )
 }

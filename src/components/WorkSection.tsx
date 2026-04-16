@@ -1,6 +1,7 @@
 'use client'
 
-import { motion } from 'framer-motion'
+import { useRef } from 'react'
+import { motion, useScroll, useTransform, useSpring } from 'framer-motion'
 import { ArrowRight } from 'lucide-react'
 import { EASE } from '@/lib/motion'
 
@@ -57,8 +58,14 @@ const projects: Project[] = [
 ]
 
 export default function WorkSection() {
+  const containerRef = useRef<HTMLElement>(null)
+  const { scrollYProgress } = useScroll({ target: containerRef, offset: ['start end', 'end start'] })
+  const y       = useTransform(scrollYProgress, [0, 1], [-30, 30])
+  const springY = useSpring(y, { stiffness: 60, damping: 20 })
+
   return (
     <section
+      ref={containerRef}
       id="work"
       className="py-32 relative overflow-hidden"
       style={{ background: '#201a1a' }}
@@ -77,7 +84,30 @@ export default function WorkSection() {
         }}
       />
 
-      <div className="max-w-7xl mx-auto px-8 relative z-10">
+      {/* ── Atmospheric orbs ── */}
+      <div
+        className="absolute top-1/2 left-[15%] w-[800px] h-[800px] rounded-full pointer-events-none orb-pulse"
+        style={{
+          background: 'radial-gradient(circle, rgba(141,2,31,0.1) 0%, transparent 70%)',
+          transform: 'translate(-50%, -50%)',
+        }}
+      />
+      <div
+        className="absolute top-[5%] right-[-5%] w-[480px] h-[480px] rounded-full pointer-events-none orb-drift"
+        style={{
+          background: 'radial-gradient(circle, rgba(141,2,31,0.06) 0%, transparent 70%)',
+          animationDelay: '2s',
+        }}
+      />
+      <div
+        className="absolute bottom-[5%] right-[5%] w-[340px] h-[340px] rounded-full pointer-events-none orb-drift"
+        style={{
+          background: 'radial-gradient(circle, rgba(255,179,178,0.04) 0%, transparent 70%)',
+          animationDelay: '9s',
+        }}
+      />
+
+      <motion.div style={{ y: springY }} className="max-w-7xl mx-auto px-8 relative z-10">
         {/* Heading */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -178,7 +208,7 @@ export default function WorkSection() {
             </motion.div>
           ))}
         </motion.div>
-      </div>
+      </motion.div>
     </section>
   )
 }

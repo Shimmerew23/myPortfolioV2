@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect, useRef } from 'react'
-import { motion } from 'framer-motion'
+import { motion, useScroll, useTransform, useSpring } from 'framer-motion'
 import Image from 'next/image'
 import { Mail, Send } from 'lucide-react'
 import { EASE } from '@/lib/motion'
@@ -47,6 +47,10 @@ export default function ContactSection() {
   const [status, setStatus] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle')
   const [cooldown, setCooldown] = useState(0)
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null)
+  const containerRef = useRef<HTMLElement>(null)
+  const { scrollYProgress } = useScroll({ target: containerRef, offset: ['start end', 'end start'] })
+  const y       = useTransform(scrollYProgress, [0, 1], [-30, 30])
+  const springY = useSpring(y, { stiffness: 60, damping: 20 })
 
   // Restore cooldown on mount (handles page refresh)
   useEffect(() => {
@@ -96,6 +100,7 @@ export default function ContactSection() {
 
   return (
     <section
+      ref={containerRef}
       id="contact"
       className="py-32 relative overflow-hidden"
       style={{ background: '#171212' }}
@@ -109,7 +114,30 @@ export default function ContactSection() {
         }}
       />
 
-      <div className="max-w-6xl mx-auto px-8 relative z-10">
+      {/* ── Atmospheric orbs ── */}
+      <div
+        className="absolute bottom-[5%] left-1/2 w-[700px] h-[700px] rounded-full pointer-events-none orb-pulse"
+        style={{
+          background: 'radial-gradient(circle, rgba(141,2,31,0.1) 0%, transparent 70%)',
+          transform: 'translate(-50%, 0)',
+        }}
+      />
+      <div
+        className="absolute top-[5%] left-[-5%] w-[420px] h-[420px] rounded-full pointer-events-none orb-drift"
+        style={{
+          background: 'radial-gradient(circle, rgba(141,2,31,0.06) 0%, transparent 70%)',
+          animationDelay: '3s',
+        }}
+      />
+      <div
+        className="absolute top-[20%] right-[-5%] w-[350px] h-[350px] rounded-full pointer-events-none orb-drift"
+        style={{
+          background: 'radial-gradient(circle, rgba(255,179,178,0.04) 0%, transparent 70%)',
+          animationDelay: '6s',
+        }}
+      />
+
+      <motion.div style={{ y: springY }} className="max-w-6xl mx-auto px-8 relative z-10">
         {/* Heading */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -259,7 +287,7 @@ export default function ContactSection() {
             </div>
           </motion.div>
         </div>
-      </div>
+      </motion.div>
     </section>
   )
 }

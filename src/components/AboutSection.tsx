@@ -1,7 +1,8 @@
 'use client'
 
+import { useRef } from 'react'
 import Image from 'next/image'
-import { motion } from 'framer-motion'
+import { motion, useScroll, useTransform, useSpring } from 'framer-motion'
 import { ShieldCheck, Sparkles, MapPin, Briefcase, GraduationCap } from 'lucide-react'
 import { EASE } from '@/lib/motion'
 
@@ -15,8 +16,14 @@ const fadeUp = {
 }
 
 export default function AboutSection() {
+  const containerRef = useRef<HTMLElement>(null)
+  const { scrollYProgress } = useScroll({ target: containerRef, offset: ['start end', 'end start'] })
+  const y       = useTransform(scrollYProgress, [0, 1], [-30, 30])
+  const springY = useSpring(y, { stiffness: 60, damping: 20 })
+
   return (
     <section
+      ref={containerRef}
       id="about"
       className="py-32 relative overflow-hidden"
       style={{ background: '#201a1a' }}
@@ -29,7 +36,30 @@ export default function AboutSection() {
         }}
       />
 
-      <div className="max-w-7xl mx-auto px-8 relative z-10">
+      {/* ── Atmospheric orbs ── */}
+      <div
+        className="absolute top-1/2 left-[20%] w-[700px] h-[700px] rounded-full pointer-events-none orb-pulse"
+        style={{
+          background: 'radial-gradient(circle, rgba(141,2,31,0.1) 0%, transparent 70%)',
+          transform: 'translate(-50%, -50%)',
+        }}
+      />
+      <div
+        className="absolute top-[10%] right-[-5%] w-[450px] h-[450px] rounded-full pointer-events-none orb-drift"
+        style={{
+          background: 'radial-gradient(circle, rgba(141,2,31,0.06) 0%, transparent 70%)',
+          animationDelay: '2s',
+        }}
+      />
+      <div
+        className="absolute bottom-[10%] left-[-5%] w-[350px] h-[350px] rounded-full pointer-events-none orb-drift"
+        style={{
+          background: 'radial-gradient(circle, rgba(255,179,178,0.04) 0%, transparent 70%)',
+          animationDelay: '5s',
+        }}
+      />
+
+      <motion.div style={{ y: springY }} className="max-w-7xl mx-auto px-8 relative z-10">
         {/* Portrait + text row */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-20 items-center">
           {/* Portrait */}
@@ -239,7 +269,7 @@ export default function AboutSection() {
             </motion.div>
           ))}
         </div>
-      </div>
+      </motion.div>
     </section>
   )
 }

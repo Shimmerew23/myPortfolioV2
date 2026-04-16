@@ -1,6 +1,7 @@
 'use client'
 
-import { motion } from 'framer-motion'
+import { useRef } from 'react'
+import { motion, useScroll, useTransform, useSpring } from 'framer-motion'
 import {
   Code2,
   Smartphone,
@@ -80,8 +81,13 @@ const services: Service[] = [
 ]
 
 export default function WhatIDoSection() {
+  const containerRef = useRef<HTMLElement>(null)
+  const { scrollYProgress } = useScroll({ target: containerRef, offset: ['start end', 'end start'] })
+  const y       = useTransform(scrollYProgress, [0, 1], [-30, 30])
+  const springY = useSpring(y, { stiffness: 60, damping: 20 })
+
   return (
-    <section id="services" className="py-32 relative overflow-hidden" style={{ background: '#171212' }}>
+    <section ref={containerRef} id="services" className="py-32 relative overflow-hidden" style={{ background: '#171212' }}>
       {/* Ambient glow */}
       <div
         className="absolute inset-0 pointer-events-none"
@@ -96,7 +102,30 @@ export default function WhatIDoSection() {
         }}
       />
 
-      <div className="max-w-7xl mx-auto px-8 relative z-10">
+      {/* ── Atmospheric orbs ── */}
+      <div
+        className="absolute top-1/2 left-1/2 w-[800px] h-[800px] rounded-full pointer-events-none orb-pulse"
+        style={{
+          background: 'radial-gradient(circle, rgba(141,2,31,0.1) 0%, transparent 70%)',
+          transform: 'translate(-50%, -50%)',
+        }}
+      />
+      <div
+        className="absolute top-[-5%] right-[10%] w-[500px] h-[500px] rounded-full pointer-events-none orb-drift"
+        style={{
+          background: 'radial-gradient(circle, rgba(141,2,31,0.06) 0%, transparent 70%)',
+          animationDelay: '4s',
+        }}
+      />
+      <div
+        className="absolute bottom-[5%] left-[-5%] w-[380px] h-[380px] rounded-full pointer-events-none orb-drift"
+        style={{
+          background: 'radial-gradient(circle, rgba(255,179,178,0.04) 0%, transparent 70%)',
+          animationDelay: '7s',
+        }}
+      />
+
+      <motion.div style={{ y: springY }} className="max-w-7xl mx-auto px-8 relative z-10">
         {/* Heading */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -179,7 +208,7 @@ export default function WhatIDoSection() {
             </motion.div>
           ))}
         </motion.div>
-      </div>
+      </motion.div>
     </section>
   )
 }
