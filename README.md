@@ -93,40 +93,42 @@
 ## Project Structure
 
 ```
-d:/myPortfolioV2/
-├── public/
-│   ├── Profile.jpg          # Portrait photo used in About section
-│   ├── github.svg           # GitHub icon (Contact section)
-│   └── linkedin.svg         # LinkedIn icon (Contact section)
+src/
+├── app/
+│   ├── api/
+│   │   └── contact/
+│   │       └── route.ts          # POST /api/contact — Nodemailer email handler
+│   ├── favicon.ico
+│   ├── globals.css               # Tailwind v4 @theme tokens + global keyframes
+│   ├── layout.tsx                # Root layout — fonts, metadata, body background
+│   └── page.tsx                  # Single-page composition of all sections
 │
-├── src/
-│   ├── app/
-│   │   ├── api/
-│   │   │   └── contact/
-│   │   │       └── route.ts # POST /api/contact — Nodemailer email handler
-│   │   ├── favicon.ico
-│   │   ├── globals.css      # Tailwind v4 @theme tokens + global keyframes
-│   │   ├── layout.tsx       # Root layout — fonts, metadata, body background
-│   │   └── page.tsx         # Single-page composition of all sections
-│   │
-│   ├── components/
-│   │   ├── Navbar.tsx        # Fixed nav with scroll tracking + mobile overlay
-│   │   ├── HeroSection.tsx   # Parallax hero with per-char animated title
-│   │   ├── AboutSection.tsx  # Portrait + biography with scroll-reveal
-│   │   ├── JourneySection.tsx # Animated timeline of career milestones
-│   │   ├── ArsenalSection.tsx # Tech skills grid by category
-│   │   ├── WorkSection.tsx   # Selected project cards with live links
-│   │   ├── ContactSection.tsx # Contact form + info sidebar
-│   │   └── Footer.tsx        # Social links + copyright
-│   │
-│   └── lib/
-│       └── motion.ts         # Shared Framer Motion easing + variant presets
+├── components/
+│   ├── layout/                   # Chrome components (persistent across scroll)
+│   │   ├── Navbar.tsx            # Fixed nav with scroll tracking + mobile overlay
+│   │   └── Footer.tsx            # Social links + copyright
+│   └── sections/                 # Page section components
+│       ├── HeroSection.tsx       # Parallax hero with per-char animated title
+│       ├── AboutSection.tsx      # Portrait + biography with scroll-reveal
+│       ├── JourneySection.tsx    # Animated timeline of career milestones
+│       ├── ArsenalSection.tsx    # Tech skills grid by category
+│       ├── WhatIDoSection.tsx    # Services & specializations grid
+│       ├── WorkSection.tsx       # Selected project cards with live links
+│       └── ContactSection.tsx    # Contact form + info sidebar
 │
-├── next.config.ts            # Next.js config (allowed dev origins, image domains)
-├── package.json
-├── tsconfig.json
-├── eslint.config.mjs
-└── postcss.config.mjs
+├── data/                         # Static content, separated from UI logic
+│   ├── navigation.ts             # navLinks[], footerLinks[]
+│   ├── journey.ts                # milestones[]
+│   ├── arsenal.ts                # skill categories[] with DevIcon/SimpleIcon URLs
+│   ├── projects.ts               # projects[]
+│   ├── services.ts               # services[] with Lucide icon component refs
+│   └── contact.ts                # contactLinks[]
+│
+├── lib/
+│   └── motion.ts                 # Shared Framer Motion easing + variant presets
+│
+└── types/
+    └── index.ts                  # Shared TypeScript interfaces (Milestone, Project, Service, etc.)
 ```
 
 ---
