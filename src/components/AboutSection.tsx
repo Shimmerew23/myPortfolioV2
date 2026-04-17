@@ -174,15 +174,15 @@ export default function AboutSection() {
               systems from the ground up. From architecture and infrastructure 
               to backend services and frontend experiences — I take full ownership 
               of the entire development lifecycle. I work across diverse technology 
-              stacks, going beyond React and Node.js to deliver robust, 
-              production-ready solutions tailored to each project’s needs.
+              stacks, to deliver robust, production-ready solutions tailored to 
+              each project’s needs.
             </motion.p>
 
             <div className="space-y-6 text-justify">
               {[
                 {
                   Icon: ShieldCheck,
-                  text: 'Focused on building secure, high-performance, and scalable architectures across a diverse range of technologies—not limited to React and Node.js.',
+                  text: 'Focused on building secure, high-performance, and scalable architectures across a diverse range of technologies.',
                 },
                 {
                   Icon: Sparkles,
