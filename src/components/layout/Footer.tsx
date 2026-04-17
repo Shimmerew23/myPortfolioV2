@@ -1,12 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
-
-const footerLinks = [
-  { label: 'LinkedIn', href: 'https://www.linkedin.com/in/justinesam023/' },
-  { label: 'GitHub',   href: 'https://github.com/Shimmerew23' },
-  { label: 'Facebook',   href: 'https://www.facebook.com/jsammm.23' },
-]
+import { footerLinks } from '@/data/navigation'
 
 export default function Footer() {
   return (

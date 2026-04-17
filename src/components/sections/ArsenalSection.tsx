@@ -1,81 +1,11 @@
 'use client'
 
-import React, { useRef } from 'react'
+import { useRef } from 'react'
 import { motion, useScroll, useTransform, useSpring } from 'framer-motion'
 import Image from 'next/image'
 import { Brain, Sparkles } from 'lucide-react'
 import { EASE } from '@/lib/motion'
-
-const CDN = 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons'
-const SI  = 'https://cdn.simpleicons.org'
-
-type Skill = {
-  name: string
-  icon?: string
-  invert?: boolean        // invert dark SVGs so they show on dark bg
-  label?: string          // text symbol fallback
-  node?: React.ReactNode  // inline React icon
-}
-
-const categories: { label: string; accent: string; skills: Skill[] }[] = [
-  {
-    label: 'Frontend',
-    accent: '#6366f1',
-    skills: [
-      { name: 'React',        icon: `${CDN}/react/react-original.svg` },
-      { name: 'Next.js',      icon: `${CDN}/nextjs/nextjs-original.svg`, invert: true },
-      { name: 'TypeScript',   icon: `${CDN}/typescript/typescript-original.svg` },
-      { name: 'JavaScript',   icon: `${CDN}/javascript/javascript-original.svg` },
-      { name: 'Tailwind CSS', icon: `${CDN}/tailwindcss/tailwindcss-original.svg` },
-      { name: 'React Native', icon: `${CDN}/react/react-original.svg` },
-    ],
-  },
-  {
-    label: 'Backend',
-    accent: '#22c55e',
-    skills: [
-      { name: 'Node.js',   icon: `${CDN}/nodejs/nodejs-original.svg` },
-      { name: 'Express',   icon: `${CDN}/express/express-original.svg`, invert: true },
-      { name: 'Python',    icon: `${CDN}/python/python-original.svg` },
-      { name: 'FastAPI',   icon: `${CDN}/fastapi/fastapi-original.svg` },
-      { name: 'REST APIs', label: '</>' },
-    ],
-  },
-  {
-    label: 'Database',
-    accent: '#a855f7',
-    skills: [
-      { name: 'PostgreSQL', icon: `${CDN}/postgresql/postgresql-original.svg` },
-      { name: 'MongoDB',    icon: `${CDN}/mongodb/mongodb-original.svg` },
-      { name: 'Supabase',   icon: `${CDN}/supabase/supabase-original.svg` },
-      { name: 'Prisma',     icon: `${CDN}/prisma/prisma-original.svg`, invert: true },
-      { name: 'MySQL',      icon: `${CDN}/mysql/mysql-original.svg` },
-      { name: 'Firebase',   icon: `${CDN}/firebase/firebase-original.svg` },
-    ],
-  },
-  {
-    label: 'DevOps & Tools',
-    accent: '#f97316',
-    skills: [
-      { name: 'Docker', icon: `${CDN}/docker/docker-original.svg` },
-      { name: 'AWS',    icon: `${CDN}/amazonwebservices/amazonwebservices-plain-wordmark.svg`, invert: true },
-      { name: 'Vercel', icon: `${CDN}/vercel/vercel-original.svg`, invert: true },
-      { name: 'Git',    icon: `${CDN}/git/git-original.svg` },
-      { name: 'NGINX',  icon: `${CDN}/nginx/nginx-original.svg` },
-    ],
-  },
-  {
-    label: 'AI & Integrations',
-    accent: '#ec4899',
-    skills: [
-      { name: 'Claude API',          node: <Brain size={14} className="shrink-0" style={{ color: '#D97706' }} /> },
-      { name: 'OpenAI API',          node: <Brain size={14} className="shrink-0" style={{ color: '#10A37F' }} /> },
-      { name: 'Stripe',              icon: `${SI}/stripe/635BFF` },
-      { name: 'GraphQL',             icon: `${CDN}/graphql/graphql-plain.svg` },
-      { name: 'Prompt Engineering',  node: <Sparkles size={14} className="shrink-0" /> },
-    ],
-  },
-]
+import { categories } from '@/data/arsenal'
 
 export default function ArsenalSection() {
   const containerRef = useRef<HTMLElement>(null)
@@ -213,8 +143,10 @@ export default function ArsenalSection() {
                         style={skill.invert ? { filter: 'invert(1)' } : undefined}
                         unoptimized
                       />
-                    ) : skill.node ? (
-                      skill.node
+                    ) : skill.iconType === 'brain' ? (
+                      <Brain size={14} className="shrink-0" style={{ color: skill.iconColor }} />
+                    ) : skill.iconType === 'sparkles' ? (
+                      <Sparkles size={14} className="shrink-0" />
                     ) : skill.label ? (
                       <span
                         className="text-[10px] leading-none shrink-0 font-mono"

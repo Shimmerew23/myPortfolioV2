@@ -112,9 +112,9 @@ export default function AboutSection() {
               className="flex items-center gap-2 mb-5"
             >
               {[
-                { Icon: MapPin,         label: 'Philippines' },
-                { Icon: Briefcase,      label: 'Available for Work' },
-                { Icon: GraduationCap,  label: 'BS Computer Engineering' },
+                { Icon: MapPin,        label: 'Philippines' },
+                { Icon: Briefcase,     label: 'Available for Work' },
+                { Icon: GraduationCap, label: 'BS Computer Engineering' },
               ].map(({ Icon, label }, i, arr) => (
                 <div key={label} className="flex items-center gap-2">
                   <div className="flex items-center gap-1.5">
@@ -170,12 +170,12 @@ export default function AboutSection() {
               variants={fadeUp}
               className="text-[#ece0df]/70 text-lg leading-relaxed mb-10 font-body text-justify"
             >
-              I design and build secured, high-performance, and scalable 
-              systems from the ground up. From architecture and infrastructure 
-              to backend services and frontend experiences — I take full ownership 
-              of the entire development lifecycle. I work across diverse technology 
-              stacks, to deliver robust, production-ready solutions tailored to 
-              each project’s needs.
+              I design and build secured, high-performance, and scalable
+              systems from the ground up. From architecture and infrastructure
+              to backend services and frontend experiences — I take full ownership
+              of the entire development lifecycle. I work across diverse technology
+              stacks, to deliver robust, production-ready solutions tailored to
+              each project&apos;s needs.
             </motion.p>
 
             <div className="space-y-6 text-justify">

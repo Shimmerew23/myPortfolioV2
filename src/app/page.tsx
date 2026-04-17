@@ -1,12 +1,12 @@
-import Navbar         from '@/components/Navbar'
-import HeroSection    from '@/components/HeroSection'
-import AboutSection   from '@/components/AboutSection'
-import JourneySection from '@/components/JourneySection'
-import ArsenalSection  from '@/components/ArsenalSection'
-import WhatIDoSection  from '@/components/WhatIDoSection'
-import WorkSection     from '@/components/WorkSection'
-import ContactSection from '@/components/ContactSection'
-import Footer         from '@/components/Footer'
+import Navbar         from '@/components/layout/Navbar'
+import Footer         from '@/components/layout/Footer'
+import HeroSection    from '@/components/sections/HeroSection'
+import AboutSection   from '@/components/sections/AboutSection'
+import JourneySection from '@/components/sections/JourneySection'
+import ArsenalSection from '@/components/sections/ArsenalSection'
+import WhatIDoSection from '@/components/sections/WhatIDoSection'
+import WorkSection    from '@/components/sections/WorkSection'
+import ContactSection from '@/components/sections/ContactSection'
 
 export default function Page() {
   return (

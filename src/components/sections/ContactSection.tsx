@@ -3,37 +3,11 @@
 import { useState, useEffect, useRef } from 'react'
 import { motion, useScroll, useTransform, useSpring } from 'framer-motion'
 import Image from 'next/image'
-import { Mail, Send } from 'lucide-react'
+import { Send } from 'lucide-react'
 import { EASE } from '@/lib/motion'
+import { contactLinks } from '@/data/contact'
 
-type ContactLink =
-  | { type: 'lucide'; Icon: React.ComponentType<{ size?: number; className?: string }>; label: string; href: string }
-  | { type: 'svg'; src: string; alt: string; label: string; href: string }
-
-const contactLinks: ContactLink[] = [
-  {
-    type: 'lucide',
-    Icon: Mail,
-    label: 'justine.psalm23@gmail.com',
-    href: 'mailto:justine.psalm23@gmail.com',
-  },
-  {
-    type: 'svg',
-    src: '/github.svg',
-    alt: 'GitHub',
-    label: 'GitHub: @Shimmerew23',
-    href: 'https://github.com/Shimmerew23',
-  },
-  {
-    type: 'svg',
-    src: '/linkedin.svg',
-    alt: 'LinkedIn',
-    label: 'LinkedIn: Justine Psalm Acosta',
-    href: 'https://www.linkedin.com/in/justinesam023/',
-  },
-]
-
-const COOLDOWN_MS = 2 * 60 * 1000 // 2 minutes
+const COOLDOWN_MS = 2 * 60 * 1000
 const LS_KEY = 'contact_last_sent'
 
 function getSecondsLeft(): number {
@@ -52,7 +26,6 @@ export default function ContactSection() {
   const y       = useTransform(scrollYProgress, [0, 1], [-30, 30])
   const springY = useSpring(y, { stiffness: 60, damping: 20 })
 
-  // Restore cooldown on mount (handles page refresh)
   useEffect(() => {
     const secs = getSecondsLeft()
     if (secs > 0) startCooldown(secs)
@@ -153,7 +126,7 @@ export default function ContactSection() {
             Let&apos;s Work Together
           </h2>
           <p className="text-[#ece0df]/55 text-sm max-w-md mx-auto leading-relaxed font-body">
-            Have a project in mind or just want to say hi?<br />Whether it's a new project, a collaboration, <br />or just a conversation — I'd love to hear from you. <br />My inbox is always open.
+            Have a project in mind or just want to say hi?<br />Whether it&apos;s a new project, a collaboration, <br />or just a conversation — I&apos;d love to hear from you. <br />My inbox is always open.
           </p>
         </motion.div>
 
